@@ -1,0 +1,229 @@
+
+<section class="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="cont-white">
+
+
+
+<div *ngIf="!isSpanish" >
+
+          <h3 class="title-section"> <i class="fa fa-user-secret"></i> Mentoring Administration </h3>
+          <p>Note: Here you can see each request that you have sent to an mentor, also you can see the request that they did to you and deny or accept it.</p>
+          <div class="example-header" >
+
+
+            <label for="finder">Search by username (email)</label>
+            <input id="finder" matInput #filter >
+
+          </div>
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+          <h3 class="title-section"> <i class="fa fa-user-secret"></i> Administración de tutoría </h3>
+          <p>Nota: Aquí puede ver cada solicitud que ha enviado a un mentor, también puede ver la solicitud que le hicieron y denegarla o aceptarla.</p>
+          <div class="example-header" >
+
+
+            <label for="finder">Buscar por nombre de usuario (email)</label>
+            <input id="finder" matInput #filter >
+
+          </div>
+
+</div>
+
+
+
+
+
+
+            <div class="example-container mat-elevation-z8">
+
+              <mat-table #table [dataSource]="dataSource" matSort>
+
+
+
+
+
+<div *ngIf="!isSpanish" >
+
+
+                <ng-container matColumnDef="Acciones">
+                  <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+
+                  <mat-cell *matCellDef="let row">
+
+                    <button (click)="accept( row )"  class="main-btn boton-editar" type="button" matTooltip="With this option, you will accept as a pupil this user" *ngIf="row.isActive === '0' && theyInvitedMe( row )">
+                      <i class="fa fa-check"></i>
+                    </button>
+
+                    <button (click)="viewMeetings( row )"  class="info-btn boton-editar" type="button" matTooltip="With this option, you will see the whole list of meetings that you concreted with this user, and actually those ones that you did not accept, or those ones that you sent to an user" *ngIf="row.isActive === '1'">
+                      <i class="fa fa-eye"></i>
+                    </button>
+
+
+                    <button (click)="deny( row )"  class="cancel-btn boton-editar" type="button" matTooltip="With this option, you will cancel as a pupil this user" *ngIf="row.isActive === '0' && theyInvitedMe( row ) === false ">
+                      <i class="fa fa-ban"></i>
+                    </button>
+
+                    <button (click)="viewProfile( row )"   class="info-btn boton-eliminar" type="button" matTooltip="With this option you can see in detail everything about this user">
+                      <i class="fa fa-user"></i>
+                    </button>
+
+                    <button (click)="viewchat( row )"  class="main-btn boton-eliminar" type="button" matTooltip="With this option you will see the chat with this user">
+                      <i class="fa fa-comments"></i>
+                    </button>
+                    <button  (click)="deny( row )" class="cancel-btn boton-eliminar" type="button" matTooltip="With this you will deny as a pupil this user" *ngIf="row.isActive === '0' && theyInvitedMe( row ) " >
+                      <i class="fa fa-times"></i>
+                    </button>
+
+                    <button (click)="deny( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip="with this option you will cancel this mentoring" *ngIf="row.isActive === '1'">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                  </mat-cell>
+
+
+
+
+
+                </ng-container>
+
+
+                  <ng-container matColumnDef="Picture">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Picture </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <img src="{{ theyInvitedMe(row) ? row.user_id.picture : row.user_id1.picture }}" style="height: 30px; width: 30px">
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{ theyInvitedMe(row) ? row.user_id.username : row.user_id1.username }} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{ theyInvitedMe(row) ? row.user_id.name : row.user_id1.name }} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ theyInvitedMe(row) ? row.user_id.description : row.user_id1.description }} </mat-cell>
+                  </ng-container>
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+                <ng-container matColumnDef="Acciones">
+                  <mat-header-cell *matHeaderCellDef> Comportamiento </mat-header-cell>
+
+                  <mat-cell *matCellDef="let row">
+
+                    <button (click)="accept( row )"  class="main-btn boton-editar" type="button" matTooltip="Con esta opción, aceptarás como alumno a este usuario" *ngIf="row.isActive === '0' && theyInvitedMe( row )">
+                      <i class="fa fa-check"></i>
+                    </button>
+
+                    <button (click)="viewMeetings( row )"  class="info-btn boton-editar" type="button" matTooltip="Con esta opción, verá la lista completa de reuniones que concreted con este usuario, y realmente aquellos que no aceptó, o aquellos que usted envió a un usuario" *ngIf="row.isActive === '1'">
+                      <i class="fa fa-eye"></i>
+                    </button>
+
+
+                    <button (click)="deny( row )"  class="cancel-btn boton-editar" type="button" matTooltip="Con esta opción, cancelarás como alumno este usuario" *ngIf="row.isActive === '0' && theyInvitedMe( row ) === false ">
+                      <i class="fa fa-ban"></i>
+                    </button>
+
+                    <button (click)="viewProfile( row )"   class="info-btn boton-eliminar" type="button" matTooltip="Con esta opción puedes ver en detalle todo sobre este usuario">
+                      <i class="fa fa-user"></i>
+                    </button>
+
+                    <button (click)="viewchat( row )"  class="main-btn boton-eliminar" type="button" matTooltip="Con esta opción, verás el chat con este usuario">
+                      <i class="fa fa-comments"></i>
+                    </button>
+                    <button  (click)="deny( row )" class="cancel-btn boton-eliminar" type="button" matTooltip="Con esto, negarás como alumno este usuario" *ngIf="row.isActive === '0' && theyInvitedMe( row ) " >
+                      <i class="fa fa-times"></i>
+                    </button>
+
+                    <button (click)="deny( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip="con esta opción cancelarás esta tutoría" *ngIf="row.isActive === '1'">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                  </mat-cell>
+
+
+
+
+
+                </ng-container>
+
+
+                  <ng-container matColumnDef="Picture">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <img src="{{ theyInvitedMe(row) ? row.user_id.picture : row.user_id1.picture }}" style="height: 30px; width: 30px">
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{ theyInvitedMe(row) ? row.user_id.username : row.user_id1.username }} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{ theyInvitedMe(row) ? row.user_id.name : row.user_id1.name }} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ theyInvitedMe(row) ? row.user_id.description : row.user_id1.description }} </mat-cell>
+                  </ng-container>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+              </mat-table>
+
+
+            <mat-paginator #paginator
+            [length]="dataSource.filteredData.length"
+            [pageIndex]="0"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

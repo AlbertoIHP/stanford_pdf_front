@@ -1,0 +1,38 @@
+.cont-white .cont-user .media-left img {
+  width: 100px;
+}
+
+.cont-white .cont-user .media h5 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  margin: 5px 0px;
+}
+
+.cont-white .cont-user .media h5 span {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.cont-white .cont-user .media p {
+  font-size: 15px;
+  color: #696969;
+  line-height: 18px;
+}
+.cont-white .cont-user {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 0px;
+  position: relative;
+  padding-bottom: 52px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.cont-white .cont-user .media .main-btn {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 0px;
+}

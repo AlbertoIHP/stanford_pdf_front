@@ -1,0 +1,39 @@
+
+<div *ngIf="!isSpanish" >
+
+<div class="example-container" >
+  <label for="">Note: This message will be sent for each user of this distribution list.</label>
+
+  <mat-form-field>
+    <textarea [(ngModel)]="newMessage.content" matInput placeholder="Write message content..." style="min-height: 100px; max-height: 100px;"></textarea>
+  </mat-form-field>
+
+  <button (click)="sendEmail()" *ngIf="!sending" class="main-btn"> <i class="fa fa-send"></i> Send Email</button>
+  <mat-spinner *ngIf="sending" ></mat-spinner>
+
+</div>
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+
+
+<div class="example-container" >
+  <label for="">Nota: Este mensaje se enviará a cada usuario de esta lista de distribución.</label>
+
+  <mat-form-field>
+    <textarea [(ngModel)]="newMessage.content" matInput placeholder="Write message content..." style="min-height: 100px; max-height: 100px;"></textarea>
+  </mat-form-field>
+
+  <button (click)="sendEmail()" *ngIf="!sending" class="main-btn"> <i class="fa fa-send"></i> Enviar correo electrónico</button>
+  <mat-spinner *ngIf="sending" ></mat-spinner>
+
+</div>
+
+
+</div>
+
+
+

@@ -1,0 +1,233 @@
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <div class="border-blue cont-white min-height">
+
+
+<div *ngIf="!isSpanish" >
+          <h3 class="title-section"> <i class="fa fa-calendar"></i> Calendar Administration  </h3>
+          <p>Note: A Calendar list, is a group of users, that can see news as events organizated in a calendar, so, as an administrator you can create events and put them into a calendar that will be able always for you.</p>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+          <h3 class="title-section"> <i class="fa fa-calendar"></i> Administración del calendario  </h3>
+          <p>Nota: Una lista de Calendario es un grupo de usuarios que puede ver las noticias como eventos organizados en un calendario, por lo que, como administrador, puede crear eventos y colocarlos en un calendario que siempre estará disponible para usted.</p>
+
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="example-header" >
+        
+            <div *ngIf="!isSpanish" >
+              <label for="finder">Search by name </label>
+
+              
+            </div>
+
+
+            <div *ngIf="isSpanish">
+              
+              <label for="finder">Buscar por nombre </label>
+
+            </div>
+
+        
+            <input id="finder" matInput #filter >
+        
+          </div>
+        
+          <div class="example-container mat-elevation-z8">
+        
+            <mat-table #table [dataSource]="dataSource" matSort>
+
+        
+        
+
+<div *ngIf="!isSpanish" >
+
+        
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        
+                <mat-cell *matCellDef="let row">
+        
+                  
+                  <button (click)="openEditCalendar( row )"  class="info-btn boton-eliminar" type="button" matTooltip="With this option you will be able to edit the calendar information">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  
+                  <button (click)="openEventHistory( row )"  class="info-btn boton-eliminar" type="button" matTooltip="With this option you will see the events history">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                  
+                  <button (click)="openCreateNewEvent( row )"  class="main-btn boton-eliminar" type="button" matTooltip="With this option you will be able to create new events">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <button (click)="deleteCalendar( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip="With this option you will delete this calendar">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                  
+                </mat-cell>
+        
+        
+        
+        
+        
+              </ng-container>
+
+                <ng-container matColumnDef="Name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef > Picture </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style="height: 100px; width: 100px;">
+                  </mat-cell>
+                </ng-container>
+        
+        
+        
+                <ng-container matColumnDef="Members">
+                  <mat-header-cell *matHeaderCellDef > Members </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button Class="main-btn" (click)="viewMembers( row )">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Comportamiento </mat-header-cell>
+
+                <mat-cell *matCellDef="let row">
+
+
+                  <button (click)="openEditCalendar( row )"  class="info-btn boton-eliminar" type="button" matTooltip="Con esta opción, podras editar este calendario">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button (click)="openEventHistory( row )"  class="info-btn boton-eliminar" type="button" matTooltip="Con esta opción, podras ver los eventos del calendario">
+                    <i class="fa fa-eye"></i>
+                  </button>
+
+                  <button (click)="openCreateNewEvent( row )"  class="main-btn boton-eliminar" type="button" matTooltip="Con esta opción, podras crear un nuevo evento">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <button (click)="deleteCalendar( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip="Con esta opción eliminaras este calendario">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </mat-cell>
+
+
+
+
+
+              </ng-container>
+
+
+
+
+                <ng-container matColumnDef="Name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef > Imagen </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style="height: 100px; width: 100px;">
+                  </mat-cell>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="Members">
+                  <mat-header-cell *matHeaderCellDef > Miembros </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button Class="main-btn" (click)="viewMembers( row )">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+  
+</div>        
+        
+
+        
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+            </mat-table>
+        
+        
+            <mat-paginator #paginator
+            [length]="dataSource.filteredData.length"
+            [pageIndex]="0"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+        
+        
+          <button class="main-btn" (click)="openAddCalendar()">
+            <i class="fa fa-plus"></i>
+          </button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

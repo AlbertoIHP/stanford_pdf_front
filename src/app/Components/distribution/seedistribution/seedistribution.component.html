@@ -1,0 +1,44 @@
+   <div *ngIf="!isSpanish" >
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let msg of messages" >
+          <td>
+            {{ msg.content }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Mensaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let msg of messages" >
+          <td>
+            {{ msg.content }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+</div>
+
+
+
+

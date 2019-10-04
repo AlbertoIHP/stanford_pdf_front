@@ -1,0 +1,129 @@
+<div *ngIf="!isSpanish" >
+
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="cont-white">
+          <h3> <i class="fa fa-comments"></i>  Chat: {{ chatRelation.name }}</h3>
+          
+          <div class="name-user">
+            <div class="media">
+              <div class="media-left">
+                <div class="cont-img">
+                  <img src="{{ otherUser.picture }}" alt="">
+                </div>
+              </div>
+              <div class="media-body">
+                <h4>{{otherUser.name }} {{otherUser.lastname}}</h4>
+              </div>
+            </div>
+            
+          </div>
+          <div class="cont-messages">
+            <div *ngFor="let msg of messageList" >
+              <div *ngIf="currentUser.username ===  msg.user_id.username" class="inline-message">
+                <div class="me-message ">
+                   {{ msg.content }}
+                </div>
+              </div>
+          
+              <div *ngIf="currentUser.username !=  msg.user_id.username" class="inline-message">
+                <div class="they-message ">
+                   {{ msg.content }}
+                </div>
+              </div>
+          
+              
+            </div>
+          
+          </div>
+          <div class="cont-send">
+            
+            <textarea [(ngModel)]="newMessage.content" placeholder="Write a message" id="" cols="30" rows="10">
+          
+            </textarea>
+            <button class="main-btn" (click)="sendMessage()" >
+              <i class="fa fa-send"></i>
+              Send
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="cont-white">
+          <h3> <i class="fa fa-comments"></i>  Chat: {{ chatRelation.name }}</h3>
+
+          <div class="name-user">
+            <div class="media">
+              <div class="media-left">
+                <div class="cont-img">
+                  <img src="{{ otherUser.picture }}" alt="">
+                </div>
+              </div>
+              <div class="media-body">
+                <h4>{{otherUser.name }} {{otherUser.lastname}}</h4>
+              </div>
+            </div>
+
+          </div>
+          <div class="cont-messages">
+            <div *ngFor="let msg of messageList" >
+              <div *ngIf="currentUser.username ===  msg.user_id.username" class="inline-message">
+                <div class="me-message ">
+                   {{ msg.content }}
+                </div>
+              </div>
+
+              <div *ngIf="currentUser.username !=  msg.user_id.username" class="inline-message">
+                <div class="they-message ">
+                   {{ msg.content }}
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+          <div class="cont-send">
+
+            <textarea [(ngModel)]="newMessage.content" placeholder="Write a message" id="" cols="30" rows="10">
+
+            </textarea>
+            <button class="main-btn" (click)="sendMessage()" >
+              <i class="fa fa-send"></i>
+              Enviar
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+
+
+
+
+
+
+

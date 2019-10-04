@@ -1,0 +1,61 @@
+<div *ngIf="!isSpanish" >
+
+<div class="example-container" *ngIf="!isAlreadySent">
+  <label for="">For: {{ destinyUser.username }}</label>
+  <p>Note: This message will be sent to start a chat with this user, but to keep talking with him he has to accept your request.</p>
+
+  <mat-form-field >
+    <input [(ngModel)]="newChat.name" matInput placeholder="Enter a name for this conversation" [(ngModel)]="newChat.name">
+  </mat-form-field>
+
+  <mat-form-field >
+    <textarea [(ngModel)]="newMessage.content" matInput placeholder="Write content..." style="min-height: 100px; max-height: 100px;"></textarea>
+  </mat-form-field>
+
+  <button (click)="sendMessage()" class="main-btn"> <i class="fa fa-send"></i> Send request message</button>
+</div>
+
+
+<div *ngIf="isAlreadySent" class="text-center">
+  You already sent an request to this user, you should wait until he accept it.
+  <br>
+  <hr>
+  <button (click)="close()" class="main-btn"> <i class="fa fa-check"></i> I got it</button>
+</div>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+
+<div class="example-container" *ngIf="!isAlreadySent">
+  <label for="">For: {{ destinyUser.username }}</label>
+  <p>Nota: Este mensaje se enviará para iniciar un chat con este usuario, pero para seguir hablando con él, debe aceptar su solicitud.</p>
+
+  <mat-form-field >
+    <input [(ngModel)]="newChat.name" matInput placeholder="Enter a name for this conversation" [(ngModel)]="newChat.name">
+  </mat-form-field>
+
+  <mat-form-field >
+    <textarea [(ngModel)]="newMessage.content" matInput placeholder="Write content..." style="min-height: 100px; max-height: 100px;"></textarea>
+  </mat-form-field>
+
+  <button (click)="sendMessage()" class="main-btn"> <i class="fa fa-send"></i> Enviar mensaje de solicitud</button>
+</div>
+
+
+<div *ngIf="isAlreadySent" class="text-center">
+  Ya enviaste una solicitud a este usuario, debes esperar hasta que la acepte.
+  <br>
+  <hr>
+  <button (click)="close()" class="main-btn"> <i class="fa fa-check"></i> Entiendo</button>
+</div>
+
+
+
+</div>
+
+
+

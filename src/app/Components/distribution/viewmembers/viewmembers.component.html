@@ -1,0 +1,51 @@
+<div *ngIf="!isSpanish" >
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Picture</th>
+          <th scope="col">User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let user of choosedUsers" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let user of choosedUsers" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+</div>
+
+
+

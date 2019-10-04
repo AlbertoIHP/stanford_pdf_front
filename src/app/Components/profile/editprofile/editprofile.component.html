@@ -1,0 +1,115 @@
+
+<div *ngIf="!isSpanish" >
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-xs-12">
+        <div class="cont-white">
+          <h3>
+            <i class="fa fa-user"></i>Edit my profile</h3>
+          <form action="edit-user" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6 col-sm-12 form-group">
+                <label>Name:</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{currentUser.name}}">
+              </div>
+              <div class="col-md-6 col-sm-12 form-group">
+                <label>Last name:</label>
+                <input type="text" name="lastname" id="lastname" class="form-control" value="{{currentUser.lastname}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description:</label>
+              <textarea name="description" id="description" class="form-control">{{currentUser.description}}</textarea>
+            </div>
+
+
+            <div class="form-group">
+              <label for="avatar">Photo: </label>
+                <div class="row" style="text-align: center ">
+
+                  <div class="col-md-6 col-md-offset-3">
+                    <div class="cont-img">
+                      <img src="{{currentUser.picture}}" alt="">
+                      <input type="file" (change)="previewFile()" #fileInput>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <button (click)="updateUser()"  class="main-btn " >
+                  <i class="fa fa-save"></i> Save
+                </button>
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-xs-12">
+        <div class="cont-white">
+          <h3>
+            <i class="fa fa-user"></i>Editar mi perfil</h3>
+          <form action="edit-user" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6 col-sm-12 form-group">
+                <label>Nombre:</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{currentUser.name}}">
+              </div>
+              <div class="col-md-6 col-sm-12 form-group">
+                <label>Apellido:</label>
+                <input type="text" name="lastname" id="lastname" class="form-control" value="{{currentUser.lastname}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Descripción:</label>
+              <textarea name="description" id="description" class="form-control">{{currentUser.description}}</textarea>
+            </div>
+
+
+            <div class="form-group">
+              <label for="avatar">Foto: </label>
+                <div class="row" style="text-align: center ">
+
+                  <div class="col-md-6 col-md-offset-3">
+                    <div class="cont-img">
+                      <img src="{{currentUser.picture}}" alt="">
+                      <input type="file" (change)="previewFile()" #fileInput>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <button (click)="updateUser()"  class="main-btn " >
+                  <i class="fa fa-save"></i> Guardar
+                </button>
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+
+
+
+

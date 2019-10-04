@@ -1,0 +1,40 @@
+<div *ngIf="!isSpanish" >
+
+<div *ngIf="showContent">
+  <section class="main-content">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="cont-white cont-profile">
+          <h3>
+            <i class="fa fa-user"></i> Profile information</h3>
+          <div class="cont-img">
+            <a href="" class="info-btn">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <img src="{{userToShow.picture}}" align="center">
+            <br />
+          </div>
+          <h4>{{userToShow.name}}</h4>
+          <p>{{userToShow.description}}</p>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="cont-white">
+          <h3> <i class="fa fa-book"></i>Upload PDF files</h3>
+          <!-- Here must be the code for uplaod PDF files-->
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-12">
+      </div>
+    </div>
+  </section>
+</div>
+  
+</div>
+
+
+
+

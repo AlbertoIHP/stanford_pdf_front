@@ -1,0 +1,532 @@
+<div *ngIf="!isSpanish" >
+
+
+
+
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step >
+      <ng-template matStepLabel>Distribution List Information</ng-template>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field style="width: 100%; margin-left: 5px">
+            <input matInput placeholder="Name" [(ngModel)]="newDis.name" >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field style="width: 100%; margin-left: 5px">
+            <textarea matInput placeholder="Description" [(ngModel)]="newDis.description" ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+
+        <div class="col-lg-12">
+         <button mat-button matStepperNext style="width: 100%" >
+            Next
+            <mat-icon>
+              arrow_forward
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+
+
+  <mat-step >
+      <ng-template matStepLabel>Distribution List Picture</ng-template>
+
+          <div class="row" style="text-align: center ">
+
+            <div class="col-md-6 col-md-offset-3">
+              <div class="cont-img">
+                <img src="{{newDis.picture}}" style="height: 100px; width: 100px" >
+                <input type="file" (change)="previewFile()" #fileInput>
+              </div>
+            </div>
+          </div>
+
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button mat-button matStepperPrevious style="width: 100%">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button mat-button matStepperNext style="width: 100%" >
+            Next
+            <mat-icon>
+              arrow_forward
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+
+
+  <mat-step >
+      <ng-template matStepLabel>Distribution List Users</ng-template>
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Picture</th>
+          <th scope="col">User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let user of choosedUsers" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+            <button (click)="deleteUser( user )" mat-button>
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngFor=" let user of usersToAdd" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+            <button (click)="deleteUser( user )" mat-button>
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field style="width: 197px">
+              <mat-select placeholder="{{userToAdd.username}}"  >
+                <mat-option *ngFor="let user of usersList" [value]="user.value" (click)="changeUserSelected( user )">
+                  {{ user.username }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <button (click)="addUserToList()" class="main-btn">
+              <i class="fa fa-plus"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button class="main-btn" matStepperNext style="width: 100%" (click)="verifyInformation()" >
+            <i class="fa fa-arrow-right"></i>
+            Next
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Distribution register complete</ng-template>
+
+      <div *ngIf="isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Info_Simple_bw.svg/2000px-Info_Simple_bw.svg.png" style="height: 100px; width: 100px">
+        </div>
+
+
+        <div>
+          <div class="row" style="margin-left: 10px">
+            <p style="justify-content: center; display: flex;">
+              Note: This is the whole information about your distribution list.
+            </p>
+          </div>
+
+          <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Distribution List Name: </p> <label> {{ newDis.name }} </label>
+            </div>
+          </div>
+
+         <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Distribution List Description: </p> <label> {{ newDis.description }} </label>
+            </div>
+          </div>
+
+         <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Users List: </p>
+              <b *ngFor=" let user of choosedUsers">
+               {{ user.username }} -
+              </b>
+              <b *ngFor=" let user of usersToAdd">
+               {{ user.username }} -
+              </b>
+            </div>
+          </div>
+
+
+
+          <div class="row" style="margin: 10px">
+            <div class="col-lg-12">
+              <p>Distribution List Picture: </p>
+              <img src="{{ newDis.picture }}" style="height: auto; width: 100px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Breezeicons-actions-22-window-close.svg/2000px-Breezeicons-actions-22-window-close.svg.png" style="height: 100px; width: 100px">
+          <br>
+        </div>
+        <div style="text-align: center">
+          <b>You did not complete the whole form, please fill the fields to can register your new distribution list.</b>
+          <hr>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6"  *ngIf="isFormComplete">
+         <button class="main-btn" style="width: 100%" (click)="edit()">
+           <i class="fa fa-check"></i>
+            Complete Distribution List Register
+          </button>
+        </div>
+      </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  <mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step >
+      <ng-template matStepLabel>Información de lista de distribución</ng-template>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field style="width: 100%; margin-left: 5px">
+            <input matInput placeholder="Name" [(ngModel)]="newDis.name" >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field style="width: 100%; margin-left: 5px">
+            <textarea matInput placeholder="Description" [(ngModel)]="newDis.description" ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+
+        <div class="col-lg-12">
+         <button mat-button matStepperNext style="width: 100%" >
+            Next
+            <mat-icon>
+              arrow_forward
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+
+
+  <mat-step >
+      <ng-template matStepLabel>Distribution List Picture</ng-template>
+
+          <div class="row" style="text-align: center ">
+
+            <div class="col-md-6 col-md-offset-3">
+              <div class="cont-img">
+                <img src="{{newDis.picture}}" style="height: 100px; width: 100px" >
+                <input type="file" (change)="previewFile()" #fileInput>
+              </div>
+            </div>
+          </div>
+
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button mat-button matStepperPrevious style="width: 100%">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button mat-button matStepperNext style="width: 100%" >
+            Next
+            <mat-icon>
+              arrow_forward
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+
+
+  <mat-step >
+      <ng-template matStepLabel>Distribution List Users</ng-template>
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Picture</th>
+          <th scope="col">User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let user of choosedUsers" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+            <button (click)="deleteUser( user )" mat-button>
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngFor=" let user of usersToAdd" >
+          <td>
+            <img src="{{ user.picture }}" style="height: 30px; width: 30px;">
+          </td>
+          <td>
+            {{ user.username }}
+            <button (click)="deleteUser( user )" mat-button>
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field style="width: 197px">
+              <mat-select placeholder="{{userToAdd.username}}"  >
+                <mat-option *ngFor="let user of usersList" [value]="user.value" (click)="changeUserSelected( user )">
+                  {{ user.username }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <button (click)="addUserToList()" class="main-btn">
+              <i class="fa fa-plus"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button class="main-btn" matStepperNext style="width: 100%" (click)="verifyInformation()" >
+            <i class="fa fa-arrow-right"></i>
+            Next
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Distribution register complete</ng-template>
+
+      <div *ngIf="isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Info_Simple_bw.svg/2000px-Info_Simple_bw.svg.png" style="height: 100px; width: 100px">
+        </div>
+
+
+        <div>
+          <div class="row" style="margin-left: 10px">
+            <p style="justify-content: center; display: flex;">
+              Note: This is the whole information about your distribution list.
+            </p>
+          </div>
+
+          <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Distribution List Name: </p> <label> {{ newDis.name }} </label>
+            </div>
+          </div>
+
+         <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Distribution List Description: </p> <label> {{ newDis.description }} </label>
+            </div>
+          </div>
+
+         <div class="row" style="margin: 10px" >
+            <div class="col-lg-12">
+              <p>Users List: </p>
+              <b *ngFor=" let user of choosedUsers">
+               {{ user.username }} -
+              </b>
+              <b *ngFor=" let user of usersToAdd">
+               {{ user.username }} -
+              </b>
+            </div>
+          </div>
+
+
+
+          <div class="row" style="margin: 10px">
+            <div class="col-lg-12">
+              <p>Distribution List Picture: </p>
+              <img src="{{ newDis.picture }}" style="height: auto; width: 100px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Breezeicons-actions-22-window-close.svg/2000px-Breezeicons-actions-22-window-close.svg.png" style="height: 100px; width: 100px">
+          <br>
+        </div>
+        <div style="text-align: center">
+          <b>You did not complete the whole form, please fill the fields to can register your new distribution list.</b>
+          <hr>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6"  *ngIf="isFormComplete">
+         <button class="main-btn" style="width: 100%" (click)="edit()">
+           <i class="fa fa-check"></i>
+            Complete Distribution List Register
+          </button>
+        </div>
+      </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+
+</div>
+
+
+
+
+
+

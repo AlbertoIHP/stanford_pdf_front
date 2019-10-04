@@ -1,0 +1,48 @@
+
+
+
+
+
+
+<div >
+
+
+<mat-toolbar color="primary" *ngIf="isLogged" >
+  <mat-toolbar-row >
+    <div class="container">
+      <img src="../assets/logo-app.jpeg" alt="" class="logo" >
+      <span class="example-spacer"></span>
+
+
+      <span class="example-spacer"></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" >
+        <mat-icon>menu</mat-icon>
+      </button> 
+
+    </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+
+<router-outlet>
+
+
+</router-outlet>
+
+<mat-menu #userMenu="matMenu" >
+  <button mat-menu-item routerLink="/profile" (click)="emitProfilePressed()">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+  <button mat-menu-item (click)="logout()"  >
+    <mat-icon>arrow_back</mat-icon>
+    <span>Sign Out</span>
+  </button>
+</mat-menu>
+
+</div>
+
+

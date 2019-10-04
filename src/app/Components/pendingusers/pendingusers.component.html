@@ -1,0 +1,187 @@
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <div class="cont-white border-sky min-height">
+
+
+
+
+<div *ngIf="!isSpanish" >
+
+          
+          <h3 class="title-section"> <i class="fa fa-user-o"></i> Pending Users Administration  </h3>
+          <p >Note: Here you can see the whole list of users that has register a new account of mentor or enterprise and accept them or deny them.</p>
+          <div class="example-header" >
+        
+        
+            <label for="finder">Search by username </label>
+            <input id="finder" matInput #filter >
+        
+          </div>
+        
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+          <h3 class="title-section"> <i class="fa fa-user-o"></i> Administración de usuarios pendiente </h3>
+          <p >Nota: Aqui puedes ver la lista completa de usuarios que han solicitado unirse a la plataforma como mentores o empresas. Podras aceptarlos o elimintarlos.</p>
+          <div class="example-header" >
+        
+        
+            <label for="finder">Buscar por nombre de usuario </label>
+            <input id="finder" matInput #filter >
+        
+          </div>
+
+</div>
+
+
+
+          <div class="example-container mat-elevation-z8">
+        
+            <mat-table #table [dataSource]="dataSource" matSort>
+        
+
+<div *ngIf="!isSpanish" >
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        
+                <mat-cell *matCellDef="let row">
+        
+                  <button (click)="accept(row)" class="main-btn boton-eliminar" type="button" matTooltip="With this option you will accept the register of this user">
+                    <i class="fa fa-check"></i>
+                  </button>
+        
+                  <button (click)="delete(row)"  class="cancel-btn boton-eliminar" type="button" matTooltip="With this option you will delete the register of this user">
+                    <i class="fa fa-times"></i>
+                  </button>
+        
+                </mat-cell>
+        
+              </ng-container>
+        
+        
+        
+        
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef> Picture </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style=" height: 30px; width: 30px;">
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.username}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Role">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.role === '3' ? 'Enterprise' : null }}
+                    {{ row.role === '4' ? 'Mentor' : null }}
+                  </mat-cell>
+                </ng-container>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        
+                <mat-cell *matCellDef="let row">
+        
+                  <button (click)="accept(row)" class="main-btn boton-eliminar" type="button" matTooltip="Esta opción aceptara al usuario">
+                    <i class="fa fa-check"></i>
+                  </button>
+        
+                  <button (click)="delete(row)"  class="cancel-btn boton-eliminar" type="button" matTooltip="Esta opción eliminara al usuario">
+                    <i class="fa fa-times"></i>
+                  </button>
+        
+                </mat-cell>
+        
+              </ng-container>
+        
+        
+        
+        
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style=" height: 30px; width: 30px;">
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Correo </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.username}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Role">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.role === '3' ? 'Enterprise' : null }}
+                    {{ row.role === '4' ? 'Mentor' : null }}
+                  </mat-cell>
+                </ng-container>
+        
+
+</div>
+
+        
+
+        
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+            </mat-table>
+        
+        
+          <mat-paginator #paginator
+          [length]="dataSource.filteredData.length"
+          [pageIndex]="0"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+          </div>
+        
+        
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

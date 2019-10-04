@@ -1,0 +1,217 @@
+<div *ngIf="!isSpanish" >
+
+
+<div *ngIf="isToday">
+
+
+  <section class="main-content">
+    <div class="container">
+      <div *ngIf="session">
+        <div class="row">
+          <div class="col-md-8 col-sm-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cont-white">
+                  <h3> <i class="fa fa-comments"></i>  Chat: {{ chat.name }}</h3>
+                  <app-subscriber *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cont-white">
+                  
+                  
+                  <div class="name-user">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="cont-img">
+                          <img src="{{ otherUser.picture }}" alt="">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <h4>{{otherUser.name }} {{otherUser.lastname}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cont-messages">
+                    <div *ngFor="let msg of messages" >
+                      <div *ngIf="currentUser.username ===  msg.user_id.username" class="inline-message">
+                        <div class="me-message ">
+                          {{ msg.content }}
+                        </div>
+                      </div>
+    
+                      <div *ngIf="currentUser.username !=  msg.user_id.username" class="inline-message">
+                        <div class="they-message ">
+                          {{ msg.content }}
+                        </div>
+                      </div>
+    
+    
+                    </div>
+    
+                  </div>
+                  <div class="cont-send">
+    
+                    <textarea [(ngModel)]="content" placeholder="Write a message" id="" cols="30" rows="10">
+    
+                    </textarea>
+                    <button class="main-btn" (click)="sendMessage()" >
+                      <i class="fa fa-send"></i>
+                      Send
+                    </button>
+                  </div>
+    
+                </div>
+
+              </div>
+              <div class="col-md-12">
+                <div class="cont-white">
+                  <app-publisher [session]="session"></app-publisher>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</div>
+
+
+<div *ngIf="isPast" style="text-align: center; margin-top: 50px">
+  <img src="https://image.flaticon.com/icons/png/512/189/189664.png" style="height: 300px; width: 300px">
+
+  <p>Information: Your meeting was planned for {{ meet.date }} at {{ meet.hour }}:{{ meet.minutes }}, so this meeting is no longer available.</p>
+
+
+</div>
+
+
+<div *ngIf="isFuture" style="text-align: center; margin-top: 50px">
+  <img src="https://image.flaticon.com/icons/png/512/189/189664.png" style="height: 300px; width: 300px">
+
+  <p>Information: Your meeting was planned for {{ meet.date }} at {{ meet.hour }}:{{ meet.minutes }}, you have to wait until the meeting day.</p>
+
+
+</div>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+<div *ngIf="isToday">
+
+
+  <section class="main-content">
+    <div class="container">
+      <div *ngIf="session">
+        <div class="row">
+          <div class="col-md-8 col-sm-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cont-white">
+                  <h3> <i class="fa fa-comments"></i>  Chat: {{ chat.name }}</h3>
+                  <app-subscriber *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cont-white">
+
+
+                  <div class="name-user">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="cont-img">
+                          <img src="{{ otherUser.picture }}" alt="">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <h4>{{otherUser.name }} {{otherUser.lastname}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cont-messages">
+                    <div *ngFor="let msg of messages" >
+                      <div *ngIf="currentUser.username ===  msg.user_id.username" class="inline-message">
+                        <div class="me-message ">
+                          {{ msg.content }}
+                        </div>
+                      </div>
+
+                      <div *ngIf="currentUser.username !=  msg.user_id.username" class="inline-message">
+                        <div class="they-message ">
+                          {{ msg.content }}
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                  <div class="cont-send">
+
+                    <textarea [(ngModel)]="content" placeholder="Write a message" id="" cols="30" rows="10">
+
+                    </textarea>
+                    <button class="main-btn" (click)="sendMessage()" >
+                      <i class="fa fa-send"></i>
+                      Enviar
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="col-md-12">
+                <div class="cont-white">
+                  <app-publisher [session]="session"></app-publisher>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</div>
+
+
+<div *ngIf="isPast" style="text-align: center; margin-top: 50px">
+  <img src="https://image.flaticon.com/icons/png/512/189/189664.png" style="height: 300px; width: 300px">
+
+  <p>Información: su reunión se planificó para {{ meet.date }} en {{ meet.hour }}:{{ meet.minutes }}, por lo que esta reunión ya no está disponible.</p>
+
+
+</div>
+
+
+<div *ngIf="isFuture" style="text-align: center; margin-top: 50px">
+  <img src="https://image.flaticon.com/icons/png/512/189/189664.png" style="height: 300px; width: 300px">
+
+  <p>Información: su reunión fue planificada para {{ meet.date }} en {{ meet.hour }}:{{ meet.minutes }},  debe esperar hasta el día de la reunión.</p>
+
+
+</div>
+
+
+</div>
+
+
+
+

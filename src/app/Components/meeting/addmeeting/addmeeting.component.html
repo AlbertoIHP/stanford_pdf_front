@@ -1,0 +1,438 @@
+<div *ngIf="!isSpanish" >
+
+
+
+<mat-horizontal-stepper #stepper="matHorizontalStepper" *ngIf="pupilsList.length > 0 || pupilRelation">
+  <mat-step *ngIf="!pupilRelation">
+      <ng-template matStepLabel>Mentor Choice</ng-template>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field >
+            <mat-select placeholder="{{choosedMentor}}" >
+             <mat-option *ngFor="let pupil of pupilsList" [value]="pupil.id" (click)="changeChoosedMentor( pupil )">
+                <img src="{{ pupil.inivitedUser.picture }}" style="height: 20px; width: 20px">
+                {{ pupil.inivitedUser.username }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-12">
+         <button  matStepperNext style="width: 100%" class="main-btn">
+           <i class="fa fa-arrow-right"></i>
+            Next
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+  <mat-step >
+    <ng-template matStepLabel>Meeting Information</ng-template>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field class="example-full-width" >
+            <input matInput placeholder="Meeting name" [(ngModel)]="newMeet.name" >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12" >
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Meeting description"  [(ngModel)]="newMeet.description"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+          <div class="col-lg-12">
+            <mat-form-field >
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date for your meeting" [(ngModel)]="choosedDate">
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker>
+
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field >
+            <mat-select placeholder=" Hour" [(ngModel)]="newMeet.hour" >
+             <mat-option *ngFor="let hour of hours" [value]="hour">
+                {{ hour }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field style="width: 100%">
+            <mat-select placeholder=" Minutes" [(ngModel)]="newMeet.minutes">
+             <mat-option *ngFor="let minute of minutes" [value]="minute">
+                {{ minute }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%" *ngIf="!pupilRelation">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button class="main-btn" matStepperNext style="width: 100%" (click)="verifyInformation()" >
+            <i class="fa fa-arrow-right"></i>
+            Next
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Meeting planing complete</ng-template>
+
+      <div *ngIf="isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Info_Simple_bw.svg/2000px-Info_Simple_bw.svg.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+        </div>
+
+
+        <div>
+          <div class="row" style="margin-left: 10px">
+            <p style="justify-content: center; display: flex;">
+                Note: This is the whole information about you meeting request, once you complete the register, you will have to wait until the invited user accept it. If you want to cancel your meeting request you can do at any moment in the meeting administration screen.
+            </p>
+          </div>
+
+          <div class="row"  >
+            <div class="col-lg-12">
+              <p>User to Meet: </p> <label> {{ choosedMentor }} </label>
+            </div>
+          </div>
+         <div class="row"  >
+            <div class="col-lg-12">
+              <p>Meeting Description: </p> <label> {{ newMeet.description }} </label>
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col-lg-12">
+              <p>Meeting Name: </p> <label> {{ newMeet.name}} </label>
+            </div>
+<!--             <div class="col-lg-6">
+              <b>Videoconference: </b> <label> {{ newMeet.videoconference === '0' ? 'No' : 'Yes'}}</label>
+            </div> -->
+          </div>
+
+          <div class="row" >
+
+            <div class="col-lg-6">
+              <p>Meeting Date: </p> <label> {{ newMeet.date}} </label>
+            </div>
+            <div class="col-lg-6">
+              <p>Meeting Time </p> <label> {{ newMeet.hour }}:{{ newMeet.minutes }} </label>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Breezeicons-actions-22-window-close.svg/2000px-Breezeicons-actions-22-window-close.svg.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+          <br>
+        </div>
+        <div style="text-align: center">
+          <b>You did not complete the whole form, please fill the fields to can send your request.</b>
+          <hr>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="row" *ngIf="!showSpinner">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
+
+        <div class="col-lg-6"  *ngIf="isFormComplete">
+         <button class="main-btn" style="width: 100%"  (click)="sendRequest()" >
+           <i class="fa fa-plus"></i>
+            Complete Meeting Register
+          </button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showSpinner">
+        <div class="col-lg-12">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+
+
+
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+<div *ngIf="pupilsList <= 0 && !pupilRelation">
+  <div style="text-align: center">
+    <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/62507-200.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+  </div>
+  <div>
+    <b > You do not have a mentor yet. Search for one, send a request and wait for acceptance. Then try to request a meeting with your mentor.</b>
+  </div>
+</div>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+<mat-horizontal-stepper #stepper="matHorizontalStepper" *ngIf="pupilsList.length > 0 || pupilRelation">
+  <mat-step *ngIf="!pupilRelation">
+      <ng-template matStepLabel>Elegir Mentor</ng-template>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field >
+            <mat-select placeholder="{{choosedMentor}}" >
+             <mat-option *ngFor="let pupil of pupilsList" [value]="pupil.id" (click)="changeChoosedMentor( pupil )">
+                <img src="{{ pupil.inivitedUser.picture }}" style="height: 20px; width: 20px">
+                {{ pupil.inivitedUser.username }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-12">
+         <button  matStepperNext style="width: 100%" class="main-btn">
+           <i class="fa fa-arrow-right"></i>
+            Siguiente
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+  <mat-step >
+    <ng-template matStepLabel>Información de la reunión</ng-template>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field class="example-full-width" >
+            <input matInput placeholder="Meeting name" [(ngModel)]="newMeet.name" >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12" >
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Meeting description"  [(ngModel)]="newMeet.description"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+          <div class="col-lg-12">
+            <mat-form-field >
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date for your meeting" [(ngModel)]="choosedDate">
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker>
+
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field >
+            <mat-select placeholder=" Hour" [(ngModel)]="newMeet.hour" >
+             <mat-option *ngFor="let hour of hours" [value]="hour">
+                {{ hour }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field style="width: 100%">
+            <mat-select placeholder=" Minutes" [(ngModel)]="newMeet.minutes">
+             <mat-option *ngFor="let minute of minutes" [value]="minute">
+                {{ minute }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%" *ngIf="!pupilRelation">
+            <i class="fa fa-arrow-left"></i>
+            Atrás
+          </button>
+        </div>
+
+        <div class="col-lg-6">
+         <button class="main-btn" matStepperNext style="width: 100%" (click)="verifyInformation()" >
+            <i class="fa fa-arrow-right"></i>
+            Siguiente
+          </button>
+        </div>
+      </div>
+  </mat-step>
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Planificación de reuniones completa</ng-template>
+
+      <div *ngIf="isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Info_Simple_bw.svg/2000px-Info_Simple_bw.svg.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+        </div>
+
+
+        <div>
+          <div class="row" style="margin-left: 10px">
+            <p style="justify-content: center; display: flex;">
+                Nota: Esta es toda la información sobre su solicitud de reunión. Una vez que complete el registro, deberá esperar hasta que el usuario invitado lo acepte. Si desea cancelar su solicitud de reunión, puede hacerlo en cualquier momento en la pantalla de administración de la reunión.
+            </p>
+          </div>
+
+          <div class="row"  >
+            <div class="col-lg-12">
+              <p>Usuario para encontrarse: </p> <label> {{ choosedMentor }} </label>
+            </div>
+          </div>
+         <div class="row"  >
+            <div class="col-lg-12">
+              <p>Descripción de la reunión: </p> <label> {{ newMeet.description }} </label>
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col-lg-12">
+              <p>Nombre de la reunión: </p> <label> {{ newMeet.name}} </label>
+            </div>
+<!--             <div class="col-lg-6">
+              <b>Videoconference: </b> <label> {{ newMeet.videoconference === '0' ? 'No' : 'Yes'}}</label>
+            </div> -->
+          </div>
+
+          <div class="row" >
+
+            <div class="col-lg-6">
+              <p>Fecha de la reunión: </p> <label> {{ newMeet.date}} </label>
+            </div>
+            <div class="col-lg-6">
+              <p>Tiempo de reunión </p> <label> {{ newMeet.hour }}:{{ newMeet.minutes }} </label>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isFormComplete">
+        <div style="text-align: center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Breezeicons-actions-22-window-close.svg/2000px-Breezeicons-actions-22-window-close.svg.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+          <br>
+        </div>
+        <div style="text-align: center">
+          <b>No completó el formulario completo, complete los campos para enviar su solicitud.</b>
+          <hr>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="row" *ngIf="!showSpinner">
+        <div class="col-lg-6">
+          <button class="main-btn" matStepperPrevious style="width: 100%">
+            <i class="fa fa-arrow-left"></i>
+            Atrás
+          </button>
+        </div>
+
+        <div class="col-lg-6"  *ngIf="isFormComplete">
+         <button class="main-btn" style="width: 100%"  (click)="sendRequest()" >
+           <i class="fa fa-plus"></i>
+            Complete Meeting Register
+          </button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showSpinner">
+        <div class="col-lg-12">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+
+
+
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+<div *ngIf="pupilsList <= 0 && !pupilRelation">
+  <div style="text-align: center">
+    <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/62507-200.png" style="height: 100px; width: 100px; margin-bottom: 20px;">
+  </div>
+  <div>
+    <b>Aún no tienes un mentor. Busque uno, envíe una solicitud y espere la aceptación. Luego intente solicitar una reunión con su mentor.</b>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

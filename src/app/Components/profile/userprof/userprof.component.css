@@ -1,0 +1,16 @@
+.cont-img .info-btn {
+  position: absolute;
+  height: 42px;
+  top: 20px;
+  right: 22px;
+  visibility: hidden;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: -3px 5px 8px rgba(0, 0, 0, 0.3)
+}
+
+.cont-img .info-btn .fa {
+  line-height: 26px;
+  font-size: 18px;
+  margin-right: 0px;
+}

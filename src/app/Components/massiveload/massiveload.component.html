@@ -1,0 +1,247 @@
+<div *ngIf="!isSpanish" >
+
+
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="cont-white border-yellow min-height">
+          <h3 class="title-section"> <i class="fa fa-upload"></i> Upload </h3>
+            <mat-horizontal-stepper #stepper="matHorizontalStepper">
+              <mat-step>
+                <ng-template matStepLabel>Download the template</ng-template>
+                <p>Note: To upload massive users, you first have to download and fill the excel template.</p>
+
+                <div class="text-center" >
+                  <a (click)="unlockUpload()" href="https://s3.amazonaws.com/growthax-assets-qa/templates/template.xlsx" target="_self" download>
+                    <i class="fa fa-download fa-2x text-primary" aria-hidden="true"></i>
+                  </a>
+                </div>
+
+
+                <div class="row">
+
+                  <div class="col-lg-12" *ngIf="!secondStep">
+                    <button class="main-btn" matStepperNext style="width: 100%">
+                      <i class="fa fa-arrow-right"></i>
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </mat-step>
+
+
+
+              <mat-step>
+                <ng-template matStepLabel>Upload the template filled</ng-template>
+                <p>Note:
+                  <b>Once you fill the template you have to upload it, and let the software register each user.</b>
+                </p>
+
+                <div class="text-center">
+                  <i class="fa fa-file fa-2x text-primary" aria-hidden="true"></i>
+                </div>
+                <div class="cont-button">
+                  <input type="file" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx" class="true-button">
+                  <button type="button" class="main-btn false-button">
+                    <i class="fa fa-upload">
+
+                    </i>
+                    Upload
+                  </button>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <button class="main-btn" matStepperPrevious style="width: 100%">
+                      <i class="fa fa-arrow-left"></i>
+                      Back
+                    </button>
+                  </div>
+
+                  <div class="col-lg-6" *ngIf="!goUpload">
+                    <button class="main-btn" matStepperNext style="width: 100%" (click)="register()">
+                      <i class="fa fa-arrow-right"></i>
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </mat-step>
+
+              <mat-step>
+                <ng-template matStepLabel>Automatic registering users</ng-template>
+                <p>Note:
+                  <b>We are registering your users, wait...</b>
+                </p>
+
+
+                <div class="row" *ngIf="ready">
+                  <div class="col-lg-12 text-center" style="display:flex; justify-content:center; margin-top: 40px; margin-bottom: 40px;">
+                    <mat-spinner></mat-spinner>
+                  </div>
+                </div>
+                <div class="row" style="text-align: center" *ngIf="!ready">
+                  <div class="col-lg-12">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/2000px-Yes_Check_Circle.svg.png"
+                      style="height: 200px;width: 200px;">
+                  </div>
+                </div>
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button class="main-btn" matStepperPrevious style="width: 100%">
+                      <i class="fa fa-arrow-left"></i>
+                      Back
+                    </button>
+                  </div>
+
+                </div>
+              </mat-step>
+
+            </mat-horizontal-stepper>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="cont-white border-yellow min-height">
+          <h3 class="title-section"> <i class="fa fa-upload"></i> Subir </h3>
+            <mat-horizontal-stepper #stepper="matHorizontalStepper">
+              <mat-step>
+                <ng-template matStepLabel>Descargue la plantilla</ng-template>
+                <p>Nota: Para cargar usuarios masivos, primero debe descargar y completar la plantilla de Excel.</p>
+
+                <div class="text-center" >
+                  <a (click)="unlockUpload()" href="https://s3.amazonaws.com/growthax-assets-qa/templates/template.xlsx" target="_self" download>
+                    <i class="fa fa-download fa-2x text-primary" aria-hidden="true"></i>
+                  </a>
+                </div>
+
+
+                <div class="row">
+
+                  <div class="col-lg-12" *ngIf="!secondStep">
+                    <button class="main-btn" matStepperNext style="width: 100%">
+                      <i class="fa fa-arrow-right"></i>
+                      Siguiente
+                    </button>
+                  </div>
+                </div>
+              </mat-step>
+
+
+
+              <mat-step>
+                <ng-template matStepLabel>Suba la plantilla llena</ng-template>
+                <p>Nota:
+                  <b>Una vez que llena la plantilla, debe cargarla y dejar que el software registre a cada usuario.</b>
+                </p>
+
+                <div class="text-center">
+                  <i class="fa fa-file fa-2x text-primary" aria-hidden="true"></i>
+                </div>
+                <div class="cont-button">
+                  <input type="file" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx" class="true-button">
+                  <button type="button" class="main-btn false-button">
+                    <i class="fa fa-upload">
+
+                    </i>
+                    Subir
+                  </button>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <button class="main-btn" matStepperPrevious style="width: 100%">
+                      <i class="fa fa-arrow-left"></i>
+                      Atrás
+                    </button>
+                  </div>
+
+                  <div class="col-lg-6" *ngIf="!goUpload">
+                    <button class="main-btn" matStepperNext style="width: 100%" (click)="register()">
+                      <i class="fa fa-arrow-right"></i>
+                      Siguiente
+                    </button>
+                  </div>
+                </div>
+              </mat-step>
+
+              <mat-step>
+                <ng-template matStepLabel>Usuarios de registro automático</ng-template>
+                <p>Nota:
+                  <b>Registramos a tus usuarios, esperamos...</b>
+                </p>
+
+
+                <div class="row" *ngIf="ready">
+                  <div class="col-lg-12 text-center" style="display:flex; justify-content:center; margin-top: 40px; margin-bottom: 40px;">
+                    <mat-spinner></mat-spinner>
+                  </div>
+                </div>
+                <div class="row" style="text-align: center" *ngIf="!ready">
+                  <div class="col-lg-12">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/2000px-Yes_Check_Circle.svg.png"
+                      style="height: 200px;width: 200px;">
+                  </div>
+                </div>
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button class="main-btn" matStepperPrevious style="width: 100%">
+                      <i class="fa fa-arrow-left"></i>
+                      Atrás
+                    </button>
+                  </div>
+
+                </div>
+              </mat-step>
+
+            </mat-horizontal-stepper>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+
+
+
+
+
+

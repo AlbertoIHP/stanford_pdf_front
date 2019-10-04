@@ -1,0 +1,216 @@
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <div class="border-purple cont-white min-height" >
+
+<div *ngIf="!isSpanish" >
+
+          <h3 class="title-section"> <i class="fa fa-list"></i>Distribution Administration  </h3>
+          <p>Note: A distribution list, is a list of users that has something in common. With this, you can send a common email message to their emails accounts and follow the whole history list of emails that a distribution list has.</p>
+          <div class="example-header" >
+        
+        
+            <label for="finder">Search by name </label>
+            <input id="finder" matInput #filter >
+        
+          </div>
+        
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+          <h3 class="title-section"> <i class="fa fa-list"></i>Administración de distribución  </h3>
+          <p>Nota: Una lista de distribución es una lista de usuarios que tiene algo en común. Con esto, puede enviar un mensaje de correo electrónico común a sus cuentas de correo electrónico y seguir toda la lista de historial de correos electrónicos que tiene una lista de distribución.</p>
+          <div class="example-header" >
+
+
+            <label for="finder">Buscar por nombre </label>
+            <input id="finder" matInput #filter >
+
+          </div>
+
+</div>
+
+
+
+
+          <div class="example-container mat-elevation-z8">
+        
+            <mat-table #table [dataSource]="dataSource" matSort>
+        
+
+
+
+
+
+
+
+<div *ngIf="!isSpanish" >
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        
+                <mat-cell *matCellDef="let row">
+        
+                  
+                  <button (click)="openEditDistribution( row )"  class="info-btn boton-eliminar" type="button" matTooltip="With this option you can edit the distribution list">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  
+                  <button (click)="openEmailsHistory( row )"  class="info-btn boton-eliminar" type="button" matTooltip="With this option you will see the email history">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                  
+                  <button (click)="openSendNewEmail( row )"  class="main-btn boton-eliminar" type="button" matTooltip=" With this option, you can send new emails to this distribution list">
+                    <i class="fa fa-send"></i>
+                  </button>
+                  <button (click)="deleteDistribution( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip=" With this option, you can delete the distribution list">
+                    <i class="fa fa-trash"></i>
+                  </button>
+        
+                </mat-cell>
+        
+              </ng-container>
+        
+                <ng-container matColumnDef="Name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+        
+        
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef > Picture </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style="height: 100px; width: 100px;">
+                  </mat-cell>
+                </ng-container>
+        
+        
+        
+                <ng-container matColumnDef="Members">
+                  <mat-header-cell *matHeaderCellDef > Members </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button class="main-btn" (click)="viewMembers( row )">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef> Comportamiento </mat-header-cell>
+
+                <mat-cell *matCellDef="let row">
+
+
+                  <button (click)="openEditDistribution( row )"  class="info-btn boton-eliminar" type="button" matTooltip="Con esta opción puedes editar la lista de distribución">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+
+                  <button (click)="openEmailsHistory( row )"  class="info-btn boton-eliminar" type="button" matTooltip="Con esta opción, verá el historial de correo electrónico">
+                    <i class="fa fa-eye"></i>
+                  </button>
+
+                  <button (click)="openSendNewEmail( row )"  class="main-btn boton-eliminar" type="button" matTooltip=" Con esta opción, puede enviar nuevos correos electrónicos a esta lista de distribución">
+                    <i class="fa fa-send"></i>
+                  </button>
+                  <button (click)="deleteDistribution( row )"  class="cancel-btn boton-eliminar" type="button" matTooltip=" Con esta opción, puede eliminar la lista de distribución">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </mat-cell>
+
+              </ng-container>
+
+                <ng-container matColumnDef="Name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description}}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Picture">
+                  <mat-header-cell *matHeaderCellDef > Imagen </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <img src="{{ row.picture }}" style="height: 100px; width: 100px;">
+                  </mat-cell>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="Members">
+                  <mat-header-cell *matHeaderCellDef > Mienbros </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button class="main-btn" (click)="viewMembers( row )">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+            </mat-table>
+        
+        
+          <mat-paginator #paginator
+          [length]="dataSource.filteredData.length"
+          [pageIndex]="0"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+          </div>
+        
+          <button class="main-btn" (click)="openAddDistribution()">
+            <i class="fa fa-plus"></i>
+          </button>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,143 @@
+<div *ngIf="!isSpanish" >
+
+      <section class="back-log"  style="background: url(./assets/main-bg.jpg);-webkit-background-size:100%;
+        -moz-background-size:100%;
+        -o-background-size:100%;
+        background-size:cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        min-height: 100vh;">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="logo">
+                <img src="assets/logo-app.jpeg" class="img-responsive">
+              </div>
+              <div class="cont-log">
+                <div class="text-center">
+                  <h3>Turn your idea into reality</h3>
+                  <p>Enter with your email and your password</p>
+                </div>
+                <form method="post" action="loginuser" class="form-sigin">
+                  <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" name="username" class="form-control" [(ngModel)]="user.email" />
+                  </div>
+                  <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password" class="form-control" [(ngModel)]="user.password" />
+                  </div>
+                  <div>
+                    <p class="main-alert"></p>
+                  </div>
+
+                  <div class="form-group text-center " style="overflow: auto; margin-top: 15px;" *ngIf="!isLogging">
+                    <button class=" main-btn" (click)="logIn()" >
+                      <i class="fa fa-sign-in" aria-hidden="true">
+                      </i> 
+                      login
+                    </button>
+
+
+
+
+                    <button class="info-btn "  (click)="goToRegisterPage()" >
+                      <i class="fa fa-user-plus" aria-hidden="true">
+                      </i> 
+                      Register
+                    </button>
+                  </div>
+
+
+
+
+                  <div class="form-group text-center " style="overflow: auto; margin-top: 15px;" *ngIf="isLogging">
+                      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+
+
+
+
+      <section class="back-log"  style="background: url(./assets/main-bg.jpg);-webkit-background-size:100%;
+        -moz-background-size:100%;
+        -o-background-size:100%;
+        background-size:cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        min-height: 100vh;">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="logo">
+                <img src="assets/logo-white.png" class="img-responsive">
+              </div>
+              <div class="cont-log">
+                <div class="text-center">
+                  <h3>Vuelve tus ideas realidad</h3>
+                  <p>Ingresa con tu correo y contraseña</p>
+                </div>
+                <form method="post" action="loginuser" class="form-sigin">
+                  <div class="form-group">
+                    <label>Correo:</label>
+                    <input type="text" name="username" class="form-control" [(ngModel)]="user.email" />
+                  </div>
+                  <div class="form-group">
+                    <label>Contraseña:</label>
+                    <input type="password" name="password" class="form-control" [(ngModel)]="user.password" />
+                  </div>
+                  <div>
+                    <p class="main-alert"></p>
+                  </div>
+
+                  <div class="form-group text-center " style="overflow: auto; margin-top: 15px;" *ngIf="!isLogging">
+                    <button class=" main-btn" (click)="logIn()" >
+                      <i class="fa fa-sign-in" aria-hidden="true">
+                      </i> 
+                      Iniciar sesión
+                    </button>
+
+
+
+
+                    <button class="info-btn "  (click)="goToRegisterPage()" >
+                      <i class="fa fa-user-plus" aria-hidden="true">
+                      </i>Registrarme</button>
+                  </div>
+
+
+
+
+                  <div class="form-group text-center " style="overflow: auto; margin-top: 15px;" *ngIf="isLogging">
+                      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+</div>
+
+
+
+

@@ -1,0 +1,179 @@
+<div *ngIf="!isSpanish" >
+
+<div *ngIf="showContent">
+  <section class="main-content">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="cont-white cont-profile">
+          <h3>
+            <i class="fa fa-user"></i> Profile Information</h3>
+
+          <div class="cont-img">
+            <a href="" class="info-btn">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <img src="{{userToShow.picture}}" align="center">
+            <br />
+          </div>
+          <h4>{{userToShow.name}}</h4>
+          <p>{{userToShow.description}}</p>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="cont-white cont-news">
+          <h3><i class="fa fa-newspaper-o"></i> News</h3>
+          <div *ngFor=" let new of newsList">
+            <div class="cont-project" >
+              <div class="media">
+                <div class="media-left">
+                  <img src="{{new.picture}}" alt="">
+                </div>
+                <div class="media-body">
+                  <h4>{{new.name}}</h4>
+                  <span>{{new.date}}</span>
+                  <p>{{new.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="cont-white meetings">
+          <h3>
+            <i class="fa fa-address-book" aria-hidden="true"></i> Next Meetings</h3>
+          <div *ngFor=" let meet of meetings">
+            <div class="media">
+              <div class="media-left">
+                <div class="cont-img">
+                  <img src="{{meet.otherUser.picture}}" alt="">
+                </div>
+              </div>
+
+              <div class="media-body">
+                <h4>{{meet.name}}</h4>
+                <p>{{meet.description}}</p>
+                <span>{{meet.date}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="cont-white">
+          <h3>
+            <i class="fa fa-book"></i>My Experiences</h3>
+          <div *ngFor=" let experience of experiences">
+            <div class="cont-project">
+              <div class="media">
+                <div class="media-left">
+                  <img src="{{experience.picture}}" alt="">
+                </div>
+                <div class="media-body">
+                  <h4>{{experience.name}}</h4>
+                  <p>{{experience.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  
+</div>
+
+
+<div *ngIf="isSpanish">
+  
+<div *ngIf="showContent">
+  <section class="main-content">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="cont-white cont-profile">
+          <h3>
+            <i class="fa fa-user"></i> Información del perfil</h3>
+
+          <div class="cont-img">
+            <a href="" class="info-btn">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <img src="{{userToShow.picture}}" align="center">
+            <br />
+          </div>
+          <h4>{{userToShow.name}}</h4>
+          <p>{{userToShow.description}}</p>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="cont-white cont-news">
+          <h3><i class="fa fa-newspaper-o"></i> Nuevos</h3>
+          <div *ngFor=" let new of newsList">
+            <div class="cont-project" >
+              <div class="media">
+                <div class="media-left">
+                  <img src="{{new.picture}}" alt="">
+                </div>
+                <div class="media-body">
+                  <h4>{{new.name}}</h4>
+                  <span>{{new.date}}</span>
+                  <p>{{new.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="cont-white meetings">
+          <h3>
+            <i class="fa fa-address-book" aria-hidden="true"></i> Próximas reuniones</h3>
+          <div *ngFor=" let meet of meetings">
+            <div class="media">
+              <div class="media-left">
+                <div class="cont-img">
+                  <img src="{{meet.otherUser.picture}}" alt="">
+                </div>
+              </div>
+
+              <div class="media-body">
+                <h4>{{meet.name}}</h4>
+                <p>{{meet.description}}</p>
+                <span>{{meet.date}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="cont-white">
+          <h3>
+            <i class="fa fa-book"></i>Mis experiencias</h3>
+          <div *ngFor=" let experience of experiences">
+            <div class="cont-project">
+              <div class="media">
+                <div class="media-left">
+                  <img src="{{experience.picture}}" alt="">
+                </div>
+                <div class="media-body">
+                  <h4>{{experience.name}}</h4>
+                  <p>{{experience.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+</div>
+

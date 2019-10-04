@@ -1,0 +1,31 @@
+<div *ngIf="loadedDates">
+      <div class="row" style="text-align: center;">
+
+        <div class="col-lg-4" mwlCalendarPreviousView view="month" [(viewDate)]="viewDate" (click)="cancelViewedDay()">
+          <button mat-button class="main-btn">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <div class="col-lg-4">
+          <h6>{{ viewDate | calendarDate:'monthViewTitle':'en' }}</h6>
+        </div>
+
+        <div class="col-lg-4" mwlCalendarNextView  view="month" [(viewDate)]="viewDate" >
+          <button class="main-btn" (click)="cancelViewedDay()">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-month-view>
+</div>
+
+
