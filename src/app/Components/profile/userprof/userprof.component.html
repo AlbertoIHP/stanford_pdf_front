@@ -23,6 +23,30 @@
         <div class="cont-white">
           <h3> <i class="fa fa-book"></i>Upload PDF files</h3>
           <!-- Here must be the code for uplaod PDF files-->
+
+  <form class="main-form" [formGroup]="firstFormGroup">
+
+    <div class="gen-drop">
+      <div class="dropzone" *ngIf="isEmptyDrop" appDragDrop (filesChangeEmiter)="dropPDFOnChance($event)"
+        (filesInvalidEmiter)="invalid_files($event)"
+        [allowed_extensions]="['pdf']">
+        <div class="text-wrapper">
+          <div class="centered">DRAG & DROP</div>
+          <div class="centered-sub">Excel format is suggested.</div>
+        </div>
+      </div>
+      <!-- <div class="display-pdf" >
+          <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="true">
+          </pdf-viewer>
+      </div> -->
+    </div>
+    <div class="gen-btn">
+      <!-- <button class="mat-custom-btn" mat-raised-button>Confirm</button> -->
+      <button class="mat-custom-btn">Confirm</button>
+    </div>
+  </form>
+
+
         </div>
       </div>
       <div class="col-md-3">

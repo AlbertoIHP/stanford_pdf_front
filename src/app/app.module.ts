@@ -129,6 +129,7 @@ import { VideoService } from './Services/Video.service';
 import { OpentokService } from './Services/opentok.service';
 import { SubscriberComponent } from './Components/subscriber/subscriber.component';
 import { PublisherComponent } from './Components/publisher/publisher.component';
+import { DragDropDirective } from './drag-drop.directive';
 
 
 
@@ -182,7 +183,8 @@ import { PublisherComponent } from './Components/publisher/publisher.component';
     UserprofComponent,
     MentorprofComponent,
     EnterpriseprofComponent,
-    UsermaintainerComponent
+    UsermaintainerComponent,
+    DragDropDirective
   ],
   entryComponents:
   [
