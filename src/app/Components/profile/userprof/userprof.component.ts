@@ -12,30 +12,28 @@ export class UserprofComponent implements OnInit
 {
   @Input('currentUser') currentUser: any
   @Input('userToShow') userToShow: any
-  isMaxSelect = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  currentPage = 0;
-  isEmptyDrop = true;
-  pdfFile;
-  pdfSrc;
-  pdfBufferRender;
-  localPDF;
+  public isMaxSelect = false;
+  public firstFormGroup: FormGroup;
+  public secondFormGroup: FormGroup;
+  public base64_pdf_array: Array<String>;
+  public files: Array<File>;
+  public isUploadedFiles: boolean;
+  public unsopported_files: Array<File>;
+  public analyzed_response_docs;
+  public showContent: any = false
+  public is_analyzing_files: boolean = false;
+  public steps: Array<boolean> = [];
 
-
-
-
-
-  dropPDFOnChance(targetInput: Array<File>) {
-    console.log(targetInput)
-    if (targetInput.length !== 1) {
-      throw new Error('Cannot use multiple files 觸發條跳視窗');
-    }
+  constructor( public events : EventHandler, private el: ElementRef, private _formBuilder: FormBuilder  )
+  {
+    this.base64_pdf_array = [];
+    this.unsopported_files = [];
+    this.isUploadedFiles = false;
   }
 
   invalid_files(fileList: Array<File>) {
     console.log("Archivos invalidos", fileList)
-    this.isEmptyDrop = false;
+    this.unsopported_files = fileList
   }
 
 
@@ -51,51 +49,61 @@ export class UserprofComponent implements OnInit
 
 
 
-  pdfOnload(event) {
-    const pdfTatget: any = event.target;
-    if (typeof FileReader !== 'undefined') {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.pdfSrc = e.target.result;
-        this.localPDF = this.pdfSrc;
-      };
-      this.pdfBufferRender = pdfTatget.files[0];
-      reader.readAsArrayBuffer(pdfTatget.files[0]);
+
+
+
+    handle_file_dropped(targetInput: Array<File>){
+
+      this.files = targetInput;
+
+      this.files.length > 10 ? alert("Max of 10 files exceeded") : null;
+
+      if (this.files) 
+      {
+        this.isUploadedFiles = true;
+        for (var i = 0 ; i < this.files.length ; i++) 
+        {
+          this.steps.push(false);
+          console.log("Uplaoded file number ",i,": ", this.files[i])
+          const reader: FileReader = new FileReader();
+          reader.onload =this._handleReaderLoaded.bind(this);
+          reader.readAsBinaryString(this.files[i]);
+
+
+      }
+      console.log("Base64 PDF docs: ",this.base64_pdf_array)
     }
-    this.isEmptyDrop = false;
-  }
 
 
-
-  consoleHeight(evt) {
-    if (evt.panel.nativeElement.clientHeight >= 255) {
-      this.isMaxSelect = true;
-    } else {
-      this.isMaxSelect = false;
     }
-  }
+  
 
-  transform(value) {
-    return (value >= 26 ? this.transform(((value / 26) >> 0) - 1) : '') + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[value % 26 >> 0];
-  }
+  _handleReaderLoaded(readerEvt) {
+     let binaryString = readerEvt.target.result;
+      this.base64_pdf_array.push(btoa(binaryString))
+      console.log("Base64 PDF: ",this.base64_pdf_array);
+    }
 
+  
 
-
-
-  public showContent: any = false
-  public isSpanish
-
-  constructor( public events : EventHandler, private el: ElementRef, private _formBuilder: FormBuilder  )
+ goAnalyzeDocs()
   {
-    this.isSpanish = false
-    this.events.language.subscribe( isSpanish => {
-      this.isSpanish = isSpanish
-      console.log( this.isSpanish )
-    })
+    if( this.files.length < 1)
+    {
+      alert("You need to upload files first")
+    }
+    else
+    {
+      this.is_analyzing_files = true;
+      for (var i = 0; i < this.files.length; i++) 
+      {        
+          console.log("Aca se debe hacer el fetch al servidor para el doc en base 64: ",this.files[i])
+        this.steps[i] = true
 
-
+       
+      }
+    }
   }
-
 
 
   ngOnChanges()

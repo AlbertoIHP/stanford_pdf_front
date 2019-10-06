@@ -22,29 +22,81 @@
       <div class="col-md-6">
         <div class="cont-white">
           <h3> <i class="fa fa-book"></i>Upload PDF files</h3>
-          <!-- Here must be the code for uplaod PDF files-->
-
-  <form class="main-form" [formGroup]="firstFormGroup">
+          <p> This page will allow you to upload PDF files to analyze them and find the keywords of each one of the uplaoded files. (There is a max of 10 docs by now)</p>
+  <form class="main-form" [formGroup]="firstFormGroup" *ngIf="!is_analyzing_files">
 
     <div class="gen-drop">
-      <div class="dropzone" *ngIf="isEmptyDrop" appDragDrop (filesChangeEmiter)="dropPDFOnChance($event)"
+      <div class="dropzone"  appDragDrop (filesChangeEmiter)="handle_file_dropped($event)"
         (filesInvalidEmiter)="invalid_files($event)"
         [allowed_extensions]="['pdf']">
         <div class="text-wrapper">
-          <div class="centered">DRAG & DROP</div>
-          <div class="centered-sub">Excel format is suggested.</div>
+
+
+          <div *ngIf="!isUploadedFiles" >
+            <div class="centered">DRAG & DROP</div>
+            <div class="centered-sub">PDF format is suggested.</div>
+          </div>
+          <div *ngIf="isUploadedFiles" >
+            <div class="centered">Compatible uploaded files: </div>
+
+            <div class="centered-sub">
+                <ul>
+                  <li *ngFor="let file of files">
+                    Name: {{ file.name }} \\  Size: {{ file.size }} \\ Type: {{ file.type }}
+                  </li>
+                </ul>              
+            </div>
+          </div>
+          <div *ngIf="isUploadedFiles" >
+            <div class="centered">Unsupported uploaded files: </div>
+
+            <div class="centered-sub">
+                <ul>
+                  <li *ngFor="let file of unsopported_files">
+                    Name: {{ file.name }} \\  Size: {{ file.size }} \\ Type: {{ file.type }}
+                  </li>
+                </ul>              
+            </div>
+          </div>
+
         </div>
       </div>
-      <!-- <div class="display-pdf" >
-          <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="true">
-          </pdf-viewer>
-      </div> -->
     </div>
-    <div class="gen-btn">
-      <!-- <button class="mat-custom-btn" mat-raised-button>Confirm</button> -->
-      <button class="mat-custom-btn">Confirm</button>
+    <div class="gen-btn">  
+      <button class="mat-custom-btn" (click)="goAnalyzeDocs()" >Analyze PDF's</button>
     </div>
   </form>
+
+
+
+
+
+
+<div class="gen-drop" *ngIf="is_analyzing_files">
+      <div class="dropzone"  appDragDrop (filesChangeEmiter)="handle_file_dropped($event)"
+        (filesInvalidEmiter)="invalid_files($event)"
+        [allowed_extensions]="['pdf']">
+        <div class="text-wrapper">
+          <div >
+            <div class="centered"> <img src="https://sindicatdellogateres.org/wp-content/uploads/2019/02/loading.gif" style="max-height: 50px"> </div>
+
+            <div class="centered-sub">
+                <ul>
+                  <li *ngFor="let file of files;index as i" >
+                    Name: {{ file.name }} \\ done: {{ steps[i] ? "Yes" : "Loading.."}}
+                  </li>
+                </ul>              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="gen-btn">  
+      <button class="mat-custom-btn" (click)="goAnalyzeDocs()" >Analyze PDF's</button>
+    </div>
+
+
 
 
         </div>

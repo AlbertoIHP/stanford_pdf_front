@@ -36,6 +36,7 @@ export class DragDropDirective {
     if (files.length > 0) {
       Array.from(files).forEach((file: File) => {
         const ext = file.name.split('.')[file.name.split('.').length - 1];
+        console.log("Directiva: Extension del fichero: ",ext)
         if (this.allowed_extensions.lastIndexOf(ext) !== -1) {
           valid_files.push(file);
         } else {
