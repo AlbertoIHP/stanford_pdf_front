@@ -1,8 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ElementRef } from '@angular/core';
-
+import { Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { EventHandler } from '../../../Services/EventHandler.service'
+import { AuthenticationService } from '../../../Services/Authentication.service'
+
+
+//Child components
+import { ViewAnalyzedDetailComponent } from './view-analyzed-detail/view-analyzed-detail.component'
+
 @Component({
   selector: 'app-userprof',
   templateUrl: './userprof.component.html',
@@ -19,15 +26,17 @@ export class UserprofComponent implements OnInit
   public files: Array<File>;
   public isUploadedFiles: boolean;
   public unsopported_files: Array<File>;
-  public analyzed_response_docs;
+  public analyzed_response_docs: Array<any>;
   public showContent: any = false
   public is_analyzing_files: boolean = false;
   public steps: Array<boolean> = [];
+  public showFinalScreen: boolean = false
 
-  constructor( public events : EventHandler, private el: ElementRef, private _formBuilder: FormBuilder  )
+  constructor( public events : EventHandler, private el: ElementRef, private _formBuilder: FormBuilder, public analyze_service: AuthenticationService, public dialog: MatDialog  )
   {
     this.base64_pdf_array = [];
     this.unsopported_files = [];
+    this.analyzed_response_docs = [ "", "", [] ];
     this.isUploadedFiles = false;
   }
 
@@ -95,19 +104,56 @@ export class UserprofComponent implements OnInit
     else
     {
       this.is_analyzing_files = true;
-      for (var i = 0; i < this.files.length; i++) 
+      for (let i = 0; i < this.base64_pdf_array.length; i++) 
       {        
-          console.log("Aca se debe hacer el fetch al servidor para el doc en base 64: ",this.files[i])
-        this.steps[i] = true
+
+
+          this.analyze_service.analyze_pdf(this.base64_pdf_array[i]).subscribe( (data) => {
+            let final_json_res = JSON.parse(data._body)
+            //console.log("Este es el array de respuesta de analisis: ",final_json_res)
+            this.steps[i] = true
+            this.analyzed_response_docs[0] = final_json_res.abbreviation_tags
+            this.analyzed_response_docs[1] = final_json_res.description_tags
+            this.analyzed_response_docs[2].push( { values_tags: final_json_res.values_tags, index: i } )
+            this.check_ended_service()
+          })       
 
        
       }
     }
   }
 
+  check_ended_service()
+  {
+    let end = true
+    let total = this.steps.length
+    let count = 0
+    for (var i = 0; i < total; ++i) 
+    {
+      if(this.steps[i])
+      {
+        count++
+      }
+    }
+
+    if(count === total)
+    {
+      this.is_analyzing_files = false
+      this.isUploadedFiles = false
+      this.showFinalScreen = true
+      console.log("Todo cargado: ",this.analyzed_response_docs)
+    }
+
+  }
+
 
   ngOnChanges()
   {
+    console.log("Steps: ", this.steps)
+
+
+
+
     if( this.currentUser && this.userToShow )
     {
 
@@ -115,6 +161,21 @@ export class UserprofComponent implements OnInit
     }
   }
 
+
+  openViewDetail( shortcut: Array<any>, description: Array<any>, values: Array<any> )
+  {
+
+    let dialogRef = this.dialog.open( ViewAnalyzedDetailComponent, {
+      //Los parámetros se asignan y se envían los datos necesarios
+      width: '1000px',
+      data:
+      {
+       shortcut: shortcut,
+       description: description,
+       values: values
+      }
+    });
+  }
 
 
 

@@ -130,6 +130,7 @@ import { OpentokService } from './Services/opentok.service';
 import { SubscriberComponent } from './Components/subscriber/subscriber.component';
 import { PublisherComponent } from './Components/publisher/publisher.component';
 import { DragDropDirective } from './drag-drop.directive';
+import { ViewAnalyzedDetailComponent } from './Components/profile/userprof/view-analyzed-detail/view-analyzed-detail.component';
 
 
 
@@ -184,7 +185,8 @@ import { DragDropDirective } from './drag-drop.directive';
     MentorprofComponent,
     EnterpriseprofComponent,
     UsermaintainerComponent,
-    DragDropDirective
+    DragDropDirective,
+    ViewAnalyzedDetailComponent
   ],
   entryComponents:
   [
@@ -211,7 +213,8 @@ import { DragDropDirective } from './drag-drop.directive';
     ViewmembersComponent,
     SendnewmailComponent,
     ViewcalmemComponent,
-    CreateneweventComponent
+    CreateneweventComponent,
+    ViewAnalyzedDetailComponent
   ],
   imports: [
     BrowserAnimationsModule,

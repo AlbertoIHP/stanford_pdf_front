@@ -21,6 +21,21 @@ export class AuthenticationService {
   }
 
 
+  analyze_pdf( base_64: String ) : Observable<any>
+  {
+    this.headers = new Headers({'Content-Type': 'application/json'})
+    this.options = new RequestOptions({ headers: this.headers })
+
+    return this.http.post( this.base+'meet/tag_analyzer', JSON.stringify({ pdf_base_64: base_64 }), this.options ).map( (response) => {
+      //console.log("Response analyze PDF: ",response)
+      return response
+    }).catch( e => {
+      return Observable.of(false)
+      //return this.capturaDeError(e)
+    })    
+  }
+
+
   //Metodo que se encarga de realizar el login a la API
   login(username: string, password: string): Observable<boolean>
   {

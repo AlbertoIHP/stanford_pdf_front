@@ -1,4 +1,4 @@
-<div *ngIf="!isSpanish" >
+<div  >
 
 <div *ngIf="showContent">
   <section class="main-content">
@@ -23,7 +23,7 @@
         <div class="cont-white">
           <h3> <i class="fa fa-book"></i>Upload PDF files</h3>
           <p> This page will allow you to upload PDF files to analyze them and find the keywords of each one of the uplaoded files. (There is a max of 10 docs by now)</p>
-  <form class="main-form" [formGroup]="firstFormGroup" *ngIf="!is_analyzing_files">
+  <form class="main-form" [formGroup]="firstFormGroup" *ngIf="!is_analyzing_files && !showFinalScreen">
 
     <div class="gen-drop">
       <div class="dropzone"  appDragDrop (filesChangeEmiter)="handle_file_dropped($event)"
@@ -68,6 +68,24 @@
   </form>
 
 
+<div *ngIf="showFinalScreen" >
+  
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let analyzed_doc of analyzed_response_docs[2]" style="height: 100% !important" >
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ this.files[analyzed_doc.index].name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button style="width: 100% !important" (click)="openViewDetail(analyzed_response_docs[0], analyzed_response_docs[1], analyzed_doc.values_tags)">View Detail</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
 
 
 
@@ -92,9 +110,7 @@
         </div>
       </div>
     </div>
-    <div class="gen-btn">  
-      <button class="mat-custom-btn" (click)="goAnalyzeDocs()" >Analyze PDF's</button>
-    </div>
+
 
 
 
