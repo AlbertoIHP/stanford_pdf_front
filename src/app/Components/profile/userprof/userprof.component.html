@@ -21,7 +21,8 @@
       </div>
       <div class="col-md-6">
         <div class="cont-white">
-          <h3> <i class="fa fa-book"></i>Upload PDF files</h3>
+          <h3> <i class="fa fa-book"></i>Upload PDF files
+          <button  (click)="reset()" class="info-btn"><i  class="material-icons">refresh</i></button></h3>
           <p> This page will allow you to upload PDF files to analyze them and find the keywords of each one of the uplaoded files. (There is a max of 10 docs by now)</p>
   <form class="main-form" [formGroup]="firstFormGroup" *ngIf="!is_analyzing_files && !showFinalScreen">
 
@@ -126,6 +127,7 @@
 </div>
   
 </div>
+
 
 
 

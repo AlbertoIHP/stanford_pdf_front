@@ -27,10 +27,10 @@ export class UserprofComponent implements OnInit
   public isUploadedFiles: boolean;
   public unsopported_files: Array<File>;
   public analyzed_response_docs: Array<any>;
-  public showContent: any = false
-  public is_analyzing_files: boolean = false;
-  public steps: Array<boolean> = [];
-  public showFinalScreen: boolean = false
+  public showContent: any
+  public is_analyzing_files: boolean;
+  public steps: Array<boolean>;
+  public showFinalScreen: boolean
 
   constructor( public events : EventHandler, private el: ElementRef, private _formBuilder: FormBuilder, public analyze_service: AuthenticationService, public dialog: MatDialog  )
   {
@@ -38,11 +38,26 @@ export class UserprofComponent implements OnInit
     this.unsopported_files = [];
     this.analyzed_response_docs = [ "", "", [] ];
     this.isUploadedFiles = false;
+    this.steps = []
+    this.showFinalScreen = false
+    this.is_analyzing_files = false
+    this.showContent = false
   }
 
   invalid_files(fileList: Array<File>) {
     console.log("Archivos invalidos", fileList)
     this.unsopported_files = fileList
+  }
+
+  reset()
+  {
+    this.base64_pdf_array = [];
+    this.unsopported_files = [];
+    this.analyzed_response_docs = [ "", "", [] ];
+    this.isUploadedFiles = false;
+    this.steps = []
+    this.showFinalScreen = false
+    this.is_analyzing_files = false
   }
 
 

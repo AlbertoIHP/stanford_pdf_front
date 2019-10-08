@@ -1,1 +1,46 @@
-<p>view-analyzed-detail works!</p>
+        
+          <div class="example-header" >
+            <label for="finder">Search by ... </label>
+            <input id="finder" matInput #filter >
+          </div>
+
+
+        <mat-table #table [dataSource]="dataSource" matSort>
+        
+        
+        
+                <ng-container matColumnDef="Shortcut">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> shortcut </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.shortcut }}
+                  </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="Description">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> description </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.description }}
+                  </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="Repetition">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> repetition </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{ row.repetition }}
+                  </mat-cell>
+                </ng-container>
+        
+       
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+            </mat-table>
+        
+        
+          <mat-paginator #paginator
+          [length]="dataSource.filteredData.length"
+          [pageIndex]="0"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>

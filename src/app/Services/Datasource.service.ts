@@ -144,6 +144,11 @@ export class ExampleDataSource extends DataSource<any> {
            let searchStr = ( item.username ).toLowerCase();
            return searchStr.indexOf(this.filter.toLowerCase()) != -1;
         }
+        else if( this.filtro === "ViewAnalyzedPDF" )
+        {
+           let searchStr = ( item.description ).toLowerCase();
+           return searchStr.indexOf(this.filter.toLowerCase()) != -1;
+        }
 
 
 
@@ -272,6 +277,15 @@ export class ExampleDataSource extends DataSource<any> {
           {
             case 'Email': [propertyA, propertyB] = [a.username, b.username]; break;
             case 'Name': [propertyA, propertyB] = [a.name, b.name]; break;
+          }
+        }
+        else if ( this.filtro === "ViewAnalyzedPDF" )
+        {
+          switch (this._sort.active)
+          {
+            case 'Shortcut': [propertyA, propertyB] = [a.shortcut, b.shortcut]; break;
+            case 'Description': [propertyA, propertyB] = [a.description, b.description]; break;
+            case 'Repetition': [propertyA, propertyB] = [a.description, b.description]; break;
           }
         }
 
